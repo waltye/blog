@@ -36,8 +36,8 @@ AppAsset::register($this);
                 'options' => ['class' => 'navbar-nav navbar-left'],
                 'items' => [
                     ['label' => '首页', 'url' => ['/site/index']],
-                    ['label' => '文章列表', 'url' => ['/site/about']],
-                    ['label' => '关于', 'url' => ['/site/contact']],
+//                    ['label' => '文章列表', 'url' => ['/site/about']],
+//                    ['label' => '关于', 'url' => ['/site/contact']],
                 ],
             ]);
             NavBar::end();

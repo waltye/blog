@@ -9,14 +9,16 @@ $this->title = '首页';
     <div class="body-content">
         <div class="row">
             <div class="col-lg-9">
+                <ul class="list-unstyled">
                 <?php
                     foreach($articleList as $val){
                         $articleUrl = Url::to(['site/article', 'dir' => $val['category'], 'name' => $val['fileName']]);
-                        //echo $val['fileName'];
-                        echo "<a href='{$articleUrl}'>{$val['fileName']}</a>";
-                        echo '<hr>';
-                    }
                 ?>
+                        <li><a href='<?= $articleUrl ?>'><?= $val['fileName'] ?></a></li>
+                        <hr>
+
+                <?php } ?>
+                </ul>
             </div>
             <div class="col-lg-3">
                 <div class="panel panel-default">

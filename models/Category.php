@@ -56,13 +56,14 @@ class Category extends Model
 
                 $articleList[] = [
                     'category' => $category,
-                    'fileName' => $file,
+                    'fileName' => substr($file, 0, strrpos($file, '.')),
                     'createTime' => filectime($realFileName),
                     'modifyTime' => filemtime($realFileName),
                 ];
             }
             closedir($dh);
         }
+
         return $articleList;
     }
 
@@ -72,6 +73,7 @@ class Category extends Model
      * @return array  首页可用数据
      */
     public function getIndexData($limit = 10){
+        $tmpArr = array();
         $allArticle = array();
         $categoryList = self::getCategoryList();
 
@@ -104,10 +106,11 @@ class Category extends Model
         $val = null;
         $realDir = Yii::getAlias('@articles');
         $parser = new GithubMarkdown();
+        $returnArr['article'] = array();
         foreach($tmpArr as $key => $val){
             $link = $realDir . '/' . $val['category'] . '/' . $val['fileName'];
             $articleBody = self::getArticleBody($link);
-            $returnArr['article'][$key]['articleBody'] = $parser->parse(mb_substr($articleBody, 0, 300, 'utf-8'));
+            $returnArr['article'][$key]['articleBody'] = $parser->parse(mb_substr($articleBody['content'], 0, 300, 'utf-8'));
 
             $returnArr['article'][$key]['category'] = $val['category'];
             $returnArr['article'][$key]['fileName'] = $val['fileName'];
@@ -120,12 +123,25 @@ class Category extends Model
 
 
     /**
-     * 根据文章路径获取文章内容
+     * 根据文章路径获取文章具体信息
      * @param $link *这里是绝对路径
-     * @return bool|string false或
+     * @return array 结果数组
      */
     function getArticleBody($link){
-        if(!is_file($link)) return false;
-        return file_get_contents($link);
+        $bodyArr = array();
+        $link = strpos($link, '.md') === false ? $link . '.md' : $link;
+        if(is_file($link))
+        {
+            $tmpArr = explode('/', $link);
+            $fileName = array_pop($tmpArr);
+            $category = array_pop($tmpArr);
+            $bodyArr['category'] = $category;
+            $bodyArr['fileName'] = substr($fileName, 0, strrpos($fileName, '.'));
+            $bodyArr['content'] = file_get_contents($link);
+            $bodyArr['createTime'] = filectime($link);
+            $bodyArr['modifyTime'] = filemtime($link);
+        }
+
+        return $bodyArr;
     }
 }

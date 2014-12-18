@@ -11,11 +11,29 @@ $this->title = '首页';
         <div class="row">
             <div class="col-lg-9">
                 <?php
+                if(is_array($indexData['article'])){
                     foreach($indexData['article'] as $val){
-                        echo $val['articleBody'];
-                        echo '<hr>';
+                    $articleUrl = Url::to(['site/article', 'dir' => $val['category'], 'name' => $val['fileName']]);
+                    $categoryUrl = Url::to(['site/category', 'id' => $val['category'],]);
+                        ?>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <a href="<?= $articleUrl ?>" class="gb-index-a"><?= $val['fileName']?></a>
+                            </div>
+
+                            <div class="panel-body">
+                                <?= $val['articleBody']?>
+                            </div>
+
+                            <ul class="list-inline gb-index-ul">
+                                <li class="text-muted">发布时间: <?=  Yii::$app->formatter->asDate($val['createTime'], 'long') ?></li>
+                                <li class="text-muted">所属分类: <a href="<?= $categoryUrl ?>"><?= $val['category'] ?></a></li>
+                                <li><a href="<?= $articleUrl ?>">查看文章详情</a></li>
+                            </ul>
+                        </div>
+                    <?php
                     }
-                ?>
+                } ?>
             </div>
             <div class="col-lg-3">
                 <div class="panel panel-default">

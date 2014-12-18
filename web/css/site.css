@@ -91,7 +91,7 @@ a.desc:after {
 }
 
 .col-lg-3 {
-    padding-left:0px;
+    padding-left:0;
     padding-right:5px;
 }
 
@@ -106,4 +106,12 @@ a.desc:after {
 
 .col-lg-3 .thumbnail li div.modal-body {
     text-align:center;
+}
+
+.site-index .gb-index-a {
+    font-size:18px;
+}
+
+.site-index .gb-index-ul {
+    padding:0 10px;
 }
