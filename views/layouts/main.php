@@ -50,7 +50,7 @@ AppAsset::register($this);
     <footer class="footer">
         <div class="container">
             <p class="pull-left">&copy; 叶龙意的网络博客 <?= date('Y') ?></p>
-            <p class="pull-right"><?= Yii::powered() ?></p>
+<!--            <p class="pull-right">--><?//= Yii::powered() ?><!--</p>-->
         </div>
     </footer>
 
