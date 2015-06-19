@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Url;
 /* @var $this yii\web\View */
-$this->title = '首页';
+$this->title = $article['fileName'];
 $categoryUrl = Url::to(['site/category', 'id' => $article['category'],]);
 ?>
 <div class="site-index row">

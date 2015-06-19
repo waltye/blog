@@ -59,6 +59,8 @@ class SiteController extends Controller
         $category = new Category();
         $articleBody = $category->getArticleBody($list);
         $parser = new GithubMarkdown();
+        $parser->html5 = true;
+        $parser->enableNewlines = true;
         $articleBody['content'] = $parser->parse($articleBody['content']);
         return $this->render('article',[
             'article' => $articleBody,

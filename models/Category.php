@@ -106,6 +106,8 @@ class Category extends Model
         $val = null;
         $realDir = Yii::getAlias('@articles');
         $parser = new GithubMarkdown();
+        $parser->html5 = true;
+        $parser->enableNewlines = true;
         $returnArr['article'] = array();
         foreach($tmpArr as $key => $val){
             $link = $realDir . '/' . $val['category'] . '/' . $val['fileName'];
