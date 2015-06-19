@@ -19,6 +19,10 @@ class SiteController extends Controller
         ];
     }
 
+    /**
+     * 首页展示
+     * @return string
+     */
     public function actionIndex()
     {
         $category = new Category();
@@ -28,6 +32,10 @@ class SiteController extends Controller
         ]);
     }
 
+    /**
+     * 文章目录列表
+     * @return string
+     */
     public function actionCategory(){
         $name = Yii::$app->request->get('id');
 
@@ -40,6 +48,10 @@ class SiteController extends Controller
         ]);
     }
 
+    /**
+     * 具体文章显示
+     * @return string
+     */
     public function actionArticle(){
         $category = Yii::$app->request->get('dir');
         $fileName = Yii::$app->request->get('name');
@@ -52,18 +64,4 @@ class SiteController extends Controller
             'article' => $articleBody,
         ]);
     }
-
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-            return $this->refresh();
-        } else {
-            return $this->render('contact', [
-                'model' => $model,
-            ]);
-        }
-    }
-
 }
