@@ -34,6 +34,14 @@ class Category extends Model
             }
             closedir($dh);
         }
+        //按字母进行排序
+        usort($categoryList, function($a, $b) {
+            $al = $a['categoryName'];
+            $bl = $b['categoryName'];
+            if ($al == $bl)
+                return 0;
+            return ($al < $bl) ? -1 : 1;
+        });
         return $categoryList;
     }
 

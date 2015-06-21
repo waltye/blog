@@ -11,7 +11,7 @@ $this->title = '首页';
         if(is_array($indexData['article'])){
             foreach($indexData['article'] as $val){
             $articleUrl = Url::to(['site/article', 'dir' => $val['category'], 'name' => $val['fileName']]);
-            $categoryUrl = Url::to(['site/category', 'id' => $val['category'],]);
+            $categoryUrl = Url::to(['site/category', 'dir' => $val['category'],]);
                 ?>
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -21,7 +21,7 @@ $this->title = '首页';
                         <?= $val['articleBody']?>
                     </div>
                     <ul class="list-inline article-info">
-                        <li class="text-muted"><i class="fa fa-calendar"></i> <?=  Yii::$app->formatter->asDate($val['createTime'], 'long') ?></li>
+                        <li class="text-muted"><i class="fa fa-calendar"></i> <?=  Yii::$app->formatter->asDate($val['createTime'], 'php:Y年n月j日') ?></li>
                         <li class="text-muted"><i class="fa fa-list-alt"></i> <a href="<?= $categoryUrl ?>" class="text-muted"><?= $val['category'] ?></a></li>
                     </ul>
                 </div>
