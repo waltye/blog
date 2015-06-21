@@ -37,7 +37,7 @@ class SiteController extends Controller
      * @return string
      */
     public function actionCategory(){
-        $name = Yii::$app->request->get('id');
+        $name = Yii::$app->request->get('dir');
 
         $category = new Category();
         $articleList = $category->getArticleList($name);

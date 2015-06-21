@@ -12,12 +12,13 @@ use cebe\markdown\GithubMarkdown;
 
 class Category extends Model
 {
-    /*
-     * 获取文章分类
+    /**
+     * 获取文章分类信息
+     * @return array|bool
      */
     public function getCategoryList()
     {
-        $categoryList = [];
+        $categoryList = array();
         $articleDir = Yii::getAlias('@articles');
         if(!is_dir($articleDir)) return false;
         if($dh = opendir($articleDir))
@@ -28,8 +29,7 @@ class Category extends Model
                 $realFileName = $articleDir.'/'.$file;
                 if($file == '.' || $file == '..' || filetype($realFileName) != 'dir') continue;
                 $categoryList[$i]['categoryName'] = $file;
-                //获取文章分类下有多少文章，-2是去除.和..目录
-                $categoryList[$i]['fileCount'] = count(scandir($realFileName)) - 2;
+                $categoryList[$i]['fileCount'] = count(self::getFilesByDir($realFileName));
                 $i++;
             }
             closedir($dh);
@@ -39,6 +39,7 @@ class Category extends Model
 
     /**
      * 根据文章分类获取该分类下的所有文章名称
+     * 约束条件：必须为文件、必须是以.md结尾
      * @param $category
      * @return array|bool
      */
@@ -52,7 +53,7 @@ class Category extends Model
             while (($file = readdir($dh)) !== false)
             {
                 $realFileName = $realDir.'/'.$file;
-                if($file == '.' || $file== '..' || filetype($realFileName) != 'file') continue;
+                if($file == '.' || $file== '..' || filetype($realFileName) != 'file' || (strpos($file, '.md') === false)) continue;
 
                 $articleList[] = [
                     'category' => $category,
@@ -129,7 +130,7 @@ class Category extends Model
      * @param $link *这里是绝对路径
      * @return array 结果数组
      */
-    function getArticleBody($link){
+    public function getArticleBody($link){
         $bodyArr = array();
         $link = strpos($link, '.md') === false ? $link . '.md' : $link;
         if(is_file($link))
@@ -145,5 +146,22 @@ class Category extends Model
         }
 
         return $bodyArr;
+    }
+
+    /**
+     * 根据目录名称获取该目录下的所有文件名称
+     * 仅识别Markdown文件
+     * @param $categoryName
+     * @return array
+     */
+    private function getFilesByDir($categoryName){
+        $returnArr = array();
+        if(filetype($categoryName) != 'dir') return $returnArr;
+        $tmpArr = scandir($categoryName);
+        foreach($tmpArr AS $file){
+            if($file == '.' || $file== '..' || filetype($categoryName . '/' . $file) != 'file' || (strpos($file, '.md') === false)) continue;
+            $returnArr[] = $file;
+        }
+        return $returnArr;
     }
 }

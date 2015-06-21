@@ -23,7 +23,7 @@ $this->title = '首页';
             <div class="list-group">
                 <?php
                 foreach($categoryList AS $val){
-                    $url = Url::to(['site/category', 'id' => $val['categoryName'],]);
+                    $url = Url::to(['site/category', 'dir' => $val['categoryName'],]);
                     ?>
                     <a class="list-group-item" href="<?= $url ?>"><span class="badge"><?= $val['fileCount'] ?></span><?= $val['categoryName'] ?></a>
                 <?php } ?>
