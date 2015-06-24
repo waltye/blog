@@ -5,8 +5,13 @@ namespace app\controllers;
 use Yii;
 use yii\web\Controller;
 use app\models\Category;
-use cebe\markdown\GithubMarkdown;
+use app\models\GithubMarkdown;
 
+/**
+ * Class SiteController
+ * @package app\controllers
+ * @since 1.0
+ */
 class SiteController extends Controller
 {
 
@@ -38,11 +43,11 @@ class SiteController extends Controller
      */
     public function actionCategory(){
         $name = Yii::$app->request->get('dir');
-
         $category = new Category();
         $articleList = $category->getArticleList($name);
         $categoryList = $category->getCategoryList();
         return $this->render('category',[
+            'categoryName' => $name,
             'articleList' => $articleList,
             'categoryList' => $categoryList,
         ]);
@@ -53,17 +58,16 @@ class SiteController extends Controller
      * @return string
      */
     public function actionArticle(){
-        $category = Yii::$app->request->get('dir');
-        $fileName = Yii::$app->request->get('name');
-        $list = Yii::getAlias('@articles') . '/' . $category . '/' . $fileName;
-        $category = new Category();
-        $articleBody = $category->getArticleBody($list);
+        $categoryName = Yii::$app->request->get('dir');
+        $articleName = Yii::$app->request->get('name');
+        $categoryModel = new Category();
+        $articleInfo = $categoryModel->getArticleBody($categoryName, $articleName);
         $parser = new GithubMarkdown();
-        $parser->html5 = true;
-        $parser->enableNewlines = true;
-        $articleBody['content'] = $parser->parse($articleBody['content']);
+        $articleInfo['content'] = $parser->parse($articleInfo['content']);
+        $articleInfo['category'] = $categoryName;
+
         return $this->render('article',[
-            'article' => $articleBody,
+            'article' => $articleInfo,
         ]);
     }
 }
