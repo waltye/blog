@@ -2,7 +2,7 @@
     "name": "waltye/blog",
     "description": "A lightweight blog post system",
     "keywords": ["blog", "Yii2", "Yii2Blog"],
-    "homepage": "www.yelongyi.com",
+    "homepage": "http://www.yelongyi.com",
     "type": "project",
     "license": "BSD-3-Clause",
     "support": {
