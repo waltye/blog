@@ -22,9 +22,9 @@ $categoryUrl = Url::to(['site/category', 'dir' => $article['category'],]);
         <!-- 多说评论框 start -->
         <div class="ds-thread" data-thread-key="<?= $article['id'] ?>" data-title="<?= $article['articleName']?>" data-url="<?= $categoryUrl ?>"></div>
         <!-- 多说评论框 end -->
-        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+        <!-- 多说公共JS代码 start yourName更改为你自己的多说short_name-->
         <script type="text/javascript">
-            var duoshuoQuery = {short_name:"yelongyi"};
+            var duoshuoQuery = {short_name:"yourName"};
             (function() {
                 var ds = document.createElement('script');
                 ds.type = 'text/javascript';ds.async = true;

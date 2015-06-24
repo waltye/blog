@@ -14,7 +14,7 @@ $config = [
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
-            'showScriptName' => false,
+            'showScriptName' => true,
             'enableStrictParsing' => false,
             'rules' => [
             ],
@@ -46,7 +46,7 @@ $config = [
     'params' => $params,
 ];
 
-if (!YII_ENV_DEV) {
+if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = 'yii\debug\Module';
