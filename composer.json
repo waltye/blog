@@ -2,9 +2,6 @@
     "name": "waltye/blog",
     "description": "A lightweight blog post system",
     "keywords": ["blog", "Yii2", "Yii2Blog"],
-    "homepage": "http://www.yelongyi.com",
-    "type": "project",
-    "license": "BSD-3-Clause",
     "support": {
         "issues": "https://github.com/waltye/blog/issues",
         "source": "https://github.com/waltye/blog"
@@ -22,31 +19,5 @@
         "yiisoft/yii2-debug": "*",
         "yiisoft/yii2-gii": "*",
         "yiisoft/yii2-faker": "*"
-    },
-    "config": {
-        "process-timeout": 1800
-    },
-    "scripts": {
-        "post-create-project-cmd": [
-            "yii\\composer\\Installer::postCreateProject"
-        ]
-    },
-    "extra": {
-        "yii\\composer\\Installer::postCreateProject": {
-            "setPermission": [
-                {
-                    "runtime": "0777",
-                    "web/assets": "0777",
-                    "yii": "0755"
-                }
-            ],
-            "generateCookieValidationKey": [
-                "config/web.php"
-            ]
-        },
-        "asset-installer-paths": {
-            "npm-asset-library": "vendor/npm",
-            "bower-asset-library": "vendor/bower"
-        }
     }
 }
