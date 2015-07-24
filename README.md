@@ -36,5 +36,5 @@ PHP >= 5.4
 
 ###支持
 * 欢迎 `Fork` 并提出 `Pull Request` 请求
-* 关于此系统的详细信息，参见：[详细文档](http://www.yelongyi.com/site/article?dir=%E5%B7%A5%E5%85%B7%E6%8C%87%E5%8D%97&name=%E7%AE%80%E6%98%93%E5%8D%9A%E5%AE%A2%E5%8F%91%E5%B8%83%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97)
+* 关于此系统的详细信息，参见：[详细文档](http://www.yelongyi.com/site/article?dir=%E5%B7%A5%E5%85%B7%E6%8C%87%E5%8D%97&name=%E8%BD%BB%E4%BE%BF%E5%8D%9A%E5%AE%A2%E5%8F%91%E5%B8%83%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97)
 * 此系统搭建的博客示例： [叶龙意的刻画板](http://www.yelongyi.com)
